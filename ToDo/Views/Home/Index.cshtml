@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ToDo.ViewModels.ObterAtividadeViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>Pessoas</title>
+</head>
+<body>
+    <div class="text-center">
+        <h1>Todas as atividades</h1>
+        <div class="text-center p-2">
+            <table class="table table-bordered table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Descricao</th>
+                        <th>Grupo</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ToDo.ViewModels.ObterAtividadeViewModel atividade in Model) {
+                        <tr>
+                            <td>@atividade.Titulo</td>
+                            <td>@atividade.Descricao</td>
+                            <td><a asp-route-id="@atividade.CodGrupo" asp-controller="Grupo" asp-action="Editar">@atividade.TituloGrupo</a></td>
+                            <td><a class="btn btn-primary" asp-route-id="@atividade.CodAtividade" asp-action="Editar">Editar</a></td>
+                            <td><a class="btn btn-primary" asp-route-id="@atividade.CodAtividade" asp-action="Remover">Deletar</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-primary" asp-action="Index">Cadastrar</a>
+    </div>
+    <a class="btn btn-primary" asp-controller="Grupo" asp-action="Criar">Criar grupo</a>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Criar">Criar atividade</a>
+    <a class="btn btn-primary" asp-controller="Grupo" asp-action="Index">Ver todas os grupos</a>
+</body>
+</html>

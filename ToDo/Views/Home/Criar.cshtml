@@ -1,0 +1,40 @@
+﻿@model ToDo.ViewModels.AdicionarAtividadeViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Criar atividade</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <h1 class="bg-primary text-white text-center m-2 p-2">Criar atividade</h1>
+    <form asp-action="Criar" method="post" class="m-2">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label asp-for="Titulo">Título:</label>
+            <input asp-for="Titulo" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Descricao">Descrição:</label>
+            <input asp-for="Descricao" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="CodGrupo">Grupo:</label>
+            <select asp-for="CodGrupo" name="CodGrupo">
+                @foreach (Api.Models.Grupo grupo in Model.grupos) {
+                    <option value="@grupo.CodGrupo">@grupo.Titulo</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar ativdade</button>
+    </form>
+        <a class="btn btn-primary" asp-controller="Grupo" asp-action="Criar">Criar grupo</a>
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Ver todas as atividades</a>
+        <a class="btn btn-primary" asp-controller="Grupo" asp-action="Index">Ver todas os grupos</a>
+</body>
+</html>

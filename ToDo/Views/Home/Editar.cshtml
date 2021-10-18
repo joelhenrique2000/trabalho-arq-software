@@ -1,0 +1,48 @@
+﻿
+@model ToDo.ViewModels.AtualizarAtividadeViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar @Model.Titulo</title>
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <h1 class="bg-primary text-white text-center m-2 p-2">Editar atividade @Model.Titulo</h1>
+    <form asp-action="Editar" method="post" class="m-2">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <input hidden="hidden" asp-for="CodAtividade" class="form-control" value="@Model.CodAtividade" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Titulo">Nome:</label>
+            <input asp-for="Titulo" class="form-control" value="@Model.Titulo" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Descricao">Sobrenome:</label>
+            <input asp-for="Descricao" class="form-control" value="@Model.Descricao" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CodGrupo">Grupo:</label>
+            <select asp-for="CodGrupo" name="CodGrupo" value="@Model.CodGrupo">
+                @foreach (Api.Models.Grupo grupo in Model.grupos) {
+                        <option value="@grupo.CodGrupo">@grupo.Titulo</option>
+
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Atualizar pessoa</button>
+    </form>
+    <a class="btn btn-primary" asp-controller="Grupo" asp-action="Criar">Criar grupo</a>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Criar">Criar atividade</a>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Ver todas as atividades</a>
+    <a class="btn btn-primary" asp-controller="Grupo" asp-action="Index">Ver todas os grupos</a>
+</body>
+</html>
